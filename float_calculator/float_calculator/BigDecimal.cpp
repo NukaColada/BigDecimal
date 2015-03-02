@@ -70,6 +70,21 @@ bool BigDecimal::operator != (const BigDecimal right)
     return true;
 }
 
+int BigDecimal::operator + (const BigDecimal right)
+{
+    int realSum = stoi(integer) + stoi(right.integer); // Holds initial integer sum
+    
+    int decSum = stoi(decimal) + stoi(right.decimal);
+    
+    if (decSum > 100)
+    {
+        decSum -= 100;
+        realSum++;
+    }
+    
+    
+}
+
 // Overloading the insertion operator to display a BigDecimal object
 ostream &operator << (ostream &outStream, BigDecimal num)
 {
@@ -93,6 +108,8 @@ istream &operator >> (istream &inStream, BigDecimal &num)
     
     return inStream;
 }
+
+
 
 BigDecimal::~BigDecimal()
 {

@@ -29,5 +29,6 @@ public:
     friend istream &operator >> (istream &, BigDecimal&);
     bool operator == (const BigDecimal);
     bool operator != (const BigDecimal);
+    int operator + (const BigDecimal);
   
 };
