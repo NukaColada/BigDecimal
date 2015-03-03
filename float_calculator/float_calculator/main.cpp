@@ -39,10 +39,8 @@ int main()
 
 	// Converting to double
 	double x = num5.toDouble();
-	cout << "x equals " << x << endl;
-    
-    BigDecimal num6("0.567");
-    num6.displayText();
+	cout << "Double x equals " << x << endl;
+
 		
 	return 0;
 }
