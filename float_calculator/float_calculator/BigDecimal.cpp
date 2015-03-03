@@ -70,19 +70,59 @@ bool BigDecimal::operator != (const BigDecimal right)
     return true;
 }
 
-int BigDecimal::operator + (const BigDecimal right)
+BigDecimal BigDecimal::operator + (BigDecimal right)
 {
-    int realSum = stoi(integer) + stoi(right.integer); // Holds initial integer sum
+    BigDecimal temp;
     
-    int decSum = stoi(decimal) + stoi(right.decimal);
+    string leftDec = decimal,
+           rightDec = right.decimal;
     
-    if (decSum > 100)
+    unsigned long leftDecLength = leftDec.length(),
+                  rightDecLength = rightDec.length();
+    
+    while (leftDecLength < rightDecLength)
     {
-        decSum -= 100;
-        realSum++;
+        decimal += "0";
+        leftDecLength++;
     }
     
+    while (rightDecLength < leftDecLength)
+    {
+        right.decimal += "0";
+        rightDecLength++;
+    }
     
+    cout << decimal << endl;
+    cout << right.decimal << endl;
+    
+    return temp;
+}
+
+// Overloading the prefix increment operator
+BigDecimal BigDecimal::operator ++ ()
+{
+    int temp = stoi(integer); // Create temporary integer variable
+    temp += 1; // Add one to variable
+    integer = to_string(temp); // Convert back to string
+    
+    return *new BigDecimal(integer, decimal); // Return a new BigDecimal object
+}
+
+// Overloading the postfix increment operator
+BigDecimal BigDecimal::operator ++ (int)
+{
+    BigDecimal temp(integer, decimal); // Create temporary object to hold values
+    int intTemp = stoi(integer); // Convert current int string to integer
+    intTemp += 1; // Increment the integer string
+    integer = to_string(intTemp); // Convert back to string
+    
+    return temp; // Return temporary object
+}
+
+
+void BigDecimal::displayText() const
+{
+
 }
 
 // Overloading the insertion operator to display a BigDecimal object

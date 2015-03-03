@@ -4,7 +4,7 @@
 #include <cstdlib>
 using namespace std;
 
-const static string lessThanTwenty[] = {"one", "two", "three", "four", "five",
+const static string lessThan20[] = {"one", "two", "three", "four", "five",
                                         "six", "seven", "eight", "nine", "ten",
                                         "eleven", "twelve", "thirteen", "fourteen",
                                         "fifteen", "sixteen", "seventeen", "eighteen"
@@ -29,6 +29,10 @@ public:
     friend istream &operator >> (istream &, BigDecimal&);
     bool operator == (const BigDecimal);
     bool operator != (const BigDecimal);
-    int operator + (const BigDecimal);
+    BigDecimal operator ++ ();
+    BigDecimal operator ++(int);
+    BigDecimal operator + (BigDecimal);
+    BigDecimal operator * (const BigDecimal);
+    void displayText() const;
   
 };
