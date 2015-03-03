@@ -151,6 +151,76 @@ BigDecimal BigDecimal::operator + (const BigDecimal right)
     return tmp;
 }
 
+BigDecimal BigDecimal::operator * (const BigDecimal right)
+{
+    BigDecimal tmp;
+    
+    string leftSide,
+           rightSide,
+           final;
+    int leftDecLength,
+        rightDecLength;
+    
+    
+    int decimalPlace,
+        finalLength,
+        leftLen,
+        rightLen,
+        leftInt,
+        rightInt,
+        multiply;
+    
+    // Get length of decimal strings
+    leftDecLength = decimal.length();
+    rightDecLength = right.decimal.length();
+    
+    // Figure out where the new decimal should be based on the string lengths
+    decimalPlace = leftDecLength + rightDecLength;
+    leftLen = leftSide.length();	
+    rightLen = rightSide.length();
+    
+    
+    // Fills in space if one string is longer than the other
+    while (rightLen > leftLen)
+    {
+        leftSide = "0" + leftSide;
+        leftLen++;
+    }
+    
+    // Check reverse length
+    while (rightLen < leftLen)
+    {
+        rightSide = "0" + rightSide;
+        rightLen++;
+    }
+    
+    
+    leftSide = integer + decimal;	
+    rightSide = right.integer + right.decimal;
+    
+    // Convert integer string to an int variable
+    leftInt = stoi(leftSide);	
+    rightInt = stoi(rightSide);
+    
+    // Multiply integers
+    multiply = leftInt * rightInt;
+    
+    // Convert back to string
+    final = to_string(multiply);
+    finalLength = final.length();
+    
+    // Assign final values to strings
+    integer = final.substr(0, finalLength - decimalPlace);
+    decimal = final.substr(finalLength - decimalPlace, finalLength);
+    
+    // Assign calculated values to temporary object
+    tmp.integer = integer;	
+    tmp.decimal = decimal;
+
+    
+    return tmp;
+}
+
 // Overloading the prefix increment operator
 BigDecimal BigDecimal::operator ++ ()
 {

@@ -17,7 +17,7 @@ int main()
     BigDecimal num("100000.2");
     BigDecimal num2("1.8");
     
-    BigDecimal num3 = num + num2;
+    BigDecimal num3 = num * num2;
     
     cout << num3 << endl;
     
