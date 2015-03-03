@@ -6,16 +6,6 @@
 #include <cstdlib>
 using namespace std;
 
-const static string lessThan20[] = {"one", "two", "three", "four", "five",
-                                        "six", "seven", "eight", "nine", "ten",
-                                        "eleven", "twelve", "thirteen", "fourteen",
-                                        "fifteen", "sixteen", "seventeen", "eighteen"
-                                        "nineteen" };
-
-const static string tens[] = {"ten", "twenty", "thirty", "forty"
-                              "fifty", "sixty", "seventy", "eighty",
-                              "ninety"};
-
 class BigDecimal
 {
 private:
@@ -35,5 +25,4 @@ public:
     BigDecimal operator ++(int);
     BigDecimal operator + (const BigDecimal);
     BigDecimal operator * (const BigDecimal);
-  
 };

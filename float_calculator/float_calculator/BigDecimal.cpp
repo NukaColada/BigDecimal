@@ -268,8 +268,8 @@ istream &operator >> (istream &inStream, BigDecimal &num)
 }
 
 
-
 BigDecimal::~BigDecimal()
 {
+
 }
 
