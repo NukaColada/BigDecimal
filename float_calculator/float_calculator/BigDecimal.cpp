@@ -1,10 +1,4 @@
-//
-//  BigDecimal.cpp
-//  float_calculator
-//
-//  Created by Austine Shughart on 2/22/15.
-//  Copyright (c) 2015 Austine Shughart. All rights reserved.
-//
+// Specification file for the BigDecimal class
 
 #include "BigDecimal.h"
 #include <string>
@@ -70,32 +64,91 @@ bool BigDecimal::operator != (const BigDecimal right)
     return true;
 }
 
-BigDecimal BigDecimal::operator + (BigDecimal right)
+BigDecimal BigDecimal::operator + (const BigDecimal right)
 {
-    BigDecimal temp;
+    BigDecimal tmp; // Object to be returned
     
-    string leftDec = decimal,
-           rightDec = right.decimal;
+    string leftTmp = decimal,
+           rightTmp = right.decimal;
     
-    unsigned long leftDecLength = leftDec.length(),
-                  rightDecLength = rightDec.length();
+    // Process for adding the decimal part first
     
-    while (leftDecLength < rightDecLength)
+    int leftTmpLength = leftTmp.length(), // Hold lengths of the two decimal strings
+        rightTmpLength = rightTmp.length();
+    
+    int tmp1, tmp2,
+        carry = 0; // Used in actual math operation
+    
+    // Ensures that both strings are the same length
+    while (leftTmpLength > rightTmpLength)
     {
-        decimal += "0";
-        leftDecLength++;
+        rightTmp += "0";
+        rightTmpLength++;
     }
     
-    while (rightDecLength < leftDecLength)
+    // Check both ways
+    while (leftTmpLength < rightTmpLength)
     {
-        right.decimal += "0";
-        rightDecLength++;
+        leftTmp += "0";
+        leftTmpLength++;
     }
     
-    cout << decimal << endl;
-    cout << right.decimal << endl;
+    // Begin with an empty string in return object's decimal string
+    // to avoid junk data
+    tmp.decimal = "";
     
-    return temp;
+    
+    for (int i = (leftTmpLength - 1); i >= 0; i--)
+    {
+        tmp1 = leftTmp[i] - '0';
+        tmp2 = rightTmp[i] - '0';
+        tmp.decimal = string(1,(((tmp1 + tmp2 + carry) % 10) + '0')) + tmp.decimal;
+        if ((tmp1 + tmp2 + carry) >= 10)
+            carry = 1;
+        else
+            carry = 0;
+    }
+    
+    // Repeat process again for integer string
+    
+    leftTmp = integer;
+    rightTmp = right.integer;
+    
+    leftTmpLength = leftTmp.length();
+    rightTmpLength = rightTmp.length();
+    
+    while(leftTmpLength > rightTmpLength)
+    {
+        rightTmp = "0" + rightTmp;
+        rightTmpLength++;
+    }
+    
+    while (leftTmpLength < rightTmpLength)
+    {
+        leftTmp = "0" + leftTmp;
+        leftTmpLength++;
+    }
+    
+    // Set integer variable to empty string to avoid garbage
+    tmp.integer = "";
+    
+    for (int i = (leftTmpLength - 1); i >= 0; i--)
+    {
+        tmp1 = leftTmp[i] - '0';
+        tmp2 = rightTmp[i] - '0';
+        
+        tmp.integer = string(1, (((tmp1 + tmp2 + carry) % 10) + '0')) + tmp.integer;
+        
+        if ((tmp1 + tmp2 + carry) >= 10)
+            carry  = 1;
+        else
+            carry = 0;
+    }
+    
+    if (carry >= 1)
+        tmp.integer = string(1, ((carry) + '0')) + tmp.integer;
+    
+    return tmp;
 }
 
 // Overloading the prefix increment operator
@@ -119,11 +172,6 @@ BigDecimal BigDecimal::operator ++ (int)
     return temp; // Return temporary object
 }
 
-
-void BigDecimal::displayText() const
-{
-
-}
 
 // Overloading the insertion operator to display a BigDecimal object
 ostream &operator << (ostream &outStream, BigDecimal num)

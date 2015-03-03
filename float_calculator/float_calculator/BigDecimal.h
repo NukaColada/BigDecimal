@@ -1,3 +1,5 @@
+// Header file for BigDecimal Class
+
 #pragma once
 #include <string>
 #include <iostream>
@@ -31,8 +33,7 @@ public:
     bool operator != (const BigDecimal);
     BigDecimal operator ++ ();
     BigDecimal operator ++(int);
-    BigDecimal operator + (BigDecimal);
+    BigDecimal operator + (const BigDecimal);
     BigDecimal operator * (const BigDecimal);
-    void displayText() const;
   
 };
