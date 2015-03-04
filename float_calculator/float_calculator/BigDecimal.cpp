@@ -242,7 +242,6 @@ BigDecimal BigDecimal::operator ++ (int)
     return temp; // Return temporary object
 }
 
-
 // Overloading the insertion operator to display a BigDecimal object
 ostream &operator << (ostream &outStream, BigDecimal num)
 {
@@ -256,9 +255,11 @@ istream &operator >> (istream &inStream, BigDecimal &num)
 {
     string input;
     
+    // Prompt user for a number
     cout << "Enter a number: ";
     getline(inStream, input);
     
+    // Separate integer and decimal
     unsigned long size = input.length();
     unsigned long decLocation = input.find('.', 0);
     num.integer = input.substr(0, decLocation);

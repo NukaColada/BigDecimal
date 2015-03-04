@@ -1,10 +1,11 @@
-
 /*
 Austine Shughart
 Email: ats5263@psu.edu
 CMPSC 122
 Assignment 2
-This program
+
+This program utilizes string objects to perform math functions
+with long decimal numbers.
 */
 
 #include <iostream>
@@ -24,13 +25,11 @@ int main()
 
 	// Demonstrate extraction operator
 	cin >> num4;
-
-	// Equality operators
-	if (num4 == num1)
-		cout << "The number you entered is equal to num1." << endl;
-	else if (num4 != num1)
-		cout << "The number you entered is not equal to num1." << endl;
-
+    
+    // Show input in console
+    cout << "You entered " << num4 << endl;
+    
+    // new variable to show incrementation
 	BigDecimal num5("42.1");
 
 	// Increment operators
